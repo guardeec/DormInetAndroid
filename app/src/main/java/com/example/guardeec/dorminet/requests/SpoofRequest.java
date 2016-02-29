@@ -1,12 +1,12 @@
 package com.example.guardeec.dorminet.requests;
 
-import com.example.guardeec.dorminet.storage.Status;
+import android.os.Handler;
+import android.widget.Button;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -17,7 +17,7 @@ public class SpoofRequest implements Runnable {
     @Override
     public void run() {
         try {
-            HttpURLConnection connect = (HttpURLConnection) new URL("http://10.42.0.1:8080/DormServer%5Fwar/change?name=GodSaveTheQuinn&pass=L33TsupaH4X0R").openConnection();
+            HttpURLConnection connect = (HttpURLConnection) new URL("http://10.42.0.1:8080/DormServerTest/change?name=GodSaveTheQuinn&pass=L33TsupaH4X0R").openConnection();
             connect.setRequestMethod("GET");
             connect.setRequestProperty("Content-length", "0");
             connect.setUseCaches(false);
@@ -36,14 +36,11 @@ public class SpoofRequest implements Runnable {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     while ((line = br.readLine()) != null) {
-                        sb.append(line + "\n");
+                        sb.append(line).append("\n");
                     }
                     br.close();
             }
-        } catch (MalformedURLException ex) {
-//код обработки ошибки
-        } catch (IOException ex) {
-//код обработки ошибки
+        } catch (IOException ignored) {
         }
     }
 }
